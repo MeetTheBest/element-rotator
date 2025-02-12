@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "main": "./dist/element-rotator.cjs",
   "module": "./dist/element-rotator.mjs",
+  "keywords": [
+    "element rotator",
+    "rotator",
+    "rotatable"
+  ],
   "exports": {
     ".": {
       "require": "./dist/element-rotator.cjs",

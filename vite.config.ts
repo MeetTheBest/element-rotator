@@ -24,12 +24,9 @@ const formats = Object.keys(fileName) as Array<keyof typeof fileName>;
 
 module.exports = defineConfig({
   base: "./",
-  esbuild: {
-    drop: [], // 删除 console.log
-  },
   build: {
     outDir: "./dist",
-    minify: false,
+    minify: true,
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       name: getPackageNameCamelCase(),
