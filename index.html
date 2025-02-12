@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #container {
+        width: 210px;
+        height: 210px;
+        background-color: #ddd;
+        transform: translate(-50px);
+      }
+
+      #target {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="target"></div>
+    <script type="module" src="/src/index.ts"></script>
+    <script type="module">
+      import ElementRotator from "./src/index.ts";
+      const containerDOM = document.querySelector("#container");
+      const elementRotator = new ElementRotator(containerDOM, {
+        rotate: 74,
+        // able: document.querySelector("#target"),
+        top: "-50px",
+      });
+
+      elementRotator.on("rotateStart", data => {
+        console.log("开始");
+      });
+
+      elementRotator.on("rotate", data => {
+        console.log("旋转");
+      });
+
+      elementRotator.on("rotateEnd", data => {
+        console.log("结束");
+      });
+    </script>
+  </body>
+</html>
