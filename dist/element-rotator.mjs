@@ -82,7 +82,7 @@ a.prototype.emit = function(t) {
       g(l[r], this, e);
   return !0;
 };
-function _(n, t, e, r) {
+function E(n, t, e, r) {
   var o, i, s;
   if (v(e), i = n._events, i === void 0 ? (i = n._events = /* @__PURE__ */ Object.create(null), n._eventsCount = 0) : (i.newListener !== void 0 && (n.emit(
     "newListener",
@@ -98,25 +98,25 @@ function _(n, t, e, r) {
   return n;
 }
 a.prototype.addListener = function(t, e) {
-  return _(this, t, e, !1);
+  return E(this, t, e, !1);
 };
 a.prototype.on = a.prototype.addListener;
 a.prototype.prependListener = function(t, e) {
-  return _(this, t, e, !0);
+  return E(this, t, e, !0);
 };
 function T() {
   if (!this.fired)
     return this.target.removeListener(this.type, this.wrapFn), this.fired = !0, arguments.length === 0 ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
 }
-function E(n, t, e) {
+function _(n, t, e) {
   var r = { fired: !1, wrapFn: void 0, target: n, type: t, listener: e }, o = T.bind(r);
   return o.listener = e, r.wrapFn = o, o;
 }
 a.prototype.once = function(t, e) {
-  return v(e), this.on(t, E(this, t, e)), this;
+  return v(e), this.on(t, _(this, t, e)), this;
 };
 a.prototype.prependOnceListener = function(t, e) {
-  return v(e), this.prependListener(t, E(this, t, e)), this;
+  return v(e), this.prependListener(t, _(this, t, e)), this;
 };
 a.prototype.removeListener = function(t, e) {
   var r, o, i, s, u;
@@ -229,8 +229,8 @@ function R(n, t, e, r) {
     throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof n);
 }
 var D = m.exports;
-const K = /* @__PURE__ */ j(D), U = () => `ID_${Math.floor(Math.random() * 100)}`, W = (n, t = 2) => Number.isNaN(+n) ? n : +(+n).toFixed(t), L = "-26px";
-class q extends K {
+const U = /* @__PURE__ */ j(D), K = () => `ID_${Math.floor(Math.random() * 100)}`, W = (n, t = 2) => Number.isNaN(+n) ? n : +(+n).toFixed(t), L = "-26px";
+class q extends U {
   constructor(e, r = {}) {
     super();
     f(this, "centerPos", { x: 0, y: 0 });
@@ -239,7 +239,7 @@ class q extends K {
     f(this, "target", null);
     f(this, "container");
     f(this, "options");
-    f(this, "targetClassName", U());
+    f(this, "targetClassName", K());
     /**
      * 鼠标按下
      * @param event
@@ -256,7 +256,7 @@ class q extends K {
         target: this.container,
         rotate: this.originRotate
       };
-      this.emit("rotateStart", i), document.addEventListener("mousemove", this.onMouseMove, !1);
+      this.emit("rotateStart", i), document.addEventListener("mousemove", this.onMouseMove, !1), document.addEventListener("mouseup", this.onMouseUp, !1);
     });
     /**
      * 鼠标移动
@@ -278,7 +278,7 @@ class q extends K {
      */
     f(this, "onMouseUp", (e) => {
       const r = { event: e, target: this.container };
-      this.emit("rotateEnd", r), document.removeEventListener("mousemove", this.onMouseMove);
+      this.emit("rotateEnd", r), document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1);
     });
     if (!e)
       throw new Error("not found container");
@@ -335,10 +335,10 @@ class q extends K {
     this.target = null, this.container = null, this.destroyEvents();
   }
   registryEvents() {
-    this.target.addEventListener("mousedown", this.onMouseDown, !1), document.addEventListener("mouseup", this.onMouseUp);
+    this.target.addEventListener("mousedown", this.onMouseDown, !1);
   }
   destroyEvents() {
-    return document.removeEventListener("mousedown", this.onMouseDown, !1), this;
+    return document.removeEventListener("mousedown", this.onMouseDown, !1), document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1), this;
   }
   /**
    * 计算旋转角度

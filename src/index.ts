@@ -121,11 +121,12 @@ class ElementRotator extends Event {
 
   registryEvents() {
     this.target!.addEventListener("mousedown", this.onMouseDown, false);
-    document.addEventListener("mouseup", this.onMouseUp);
   }
 
   destroyEvents() {
     document.removeEventListener("mousedown", this.onMouseDown, false);
+    document.removeEventListener("mousemove", this.onMouseMove, false);
+    document.removeEventListener("mouseup", this.onMouseUp, false);
     return this;
   }
 
@@ -157,6 +158,7 @@ class ElementRotator extends Event {
     } as IEvent;
     this.emit("rotateStart", _event);
     document.addEventListener("mousemove", this.onMouseMove, false);
+    document.addEventListener("mouseup", this.onMouseUp, false);
   };
 
   /**
@@ -187,7 +189,8 @@ class ElementRotator extends Event {
   onMouseUp = (event: MouseEvent) => {
     const _event = { event, target: this.container } as IEvent;
     this.emit("rotateEnd", _event);
-    document.removeEventListener("mousemove", this.onMouseMove);
+    document.removeEventListener("mousemove", this.onMouseMove, false);
+    document.removeEventListener("mouseup", this.onMouseUp, false);
   };
 
   /**
