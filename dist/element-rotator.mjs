@@ -1,66 +1,66 @@
 var O = Object.defineProperty;
-var N = (n, t, e) => t in n ? O(n, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : n[t] = e;
-var f = (n, t, e) => (N(n, typeof t != "symbol" ? t + "" : t, e), e);
-function j(n) {
-  return n && n.__esModule && Object.prototype.hasOwnProperty.call(n, "default") ? n.default : n;
+var N = (t, n, e) => n in t ? O(t, n, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[n] = e;
+var f = (t, n, e) => (N(t, typeof n != "symbol" ? n + "" : n, e), e);
+function j(t) {
+  return t && t.__esModule && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
 }
-var m = { exports: {} }, d = typeof Reflect == "object" ? Reflect : null, g = d && typeof d.apply == "function" ? d.apply : function(t, e, r) {
-  return Function.prototype.apply.call(t, e, r);
-}, p;
-d && typeof d.ownKeys == "function" ? p = d.ownKeys : Object.getOwnPropertySymbols ? p = function(t) {
-  return Object.getOwnPropertyNames(t).concat(Object.getOwnPropertySymbols(t));
-} : p = function(t) {
-  return Object.getOwnPropertyNames(t);
+var m = { exports: {} }, d = typeof Reflect == "object" ? Reflect : null, g = d && typeof d.apply == "function" ? d.apply : function(n, e, r) {
+  return Function.prototype.apply.call(n, e, r);
+}, v;
+d && typeof d.ownKeys == "function" ? v = d.ownKeys : Object.getOwnPropertySymbols ? v = function(n) {
+  return Object.getOwnPropertyNames(n).concat(Object.getOwnPropertySymbols(n));
+} : v = function(n) {
+  return Object.getOwnPropertyNames(n);
 };
-function A(n) {
-  console && console.warn && console.warn(n);
+function A(t) {
+  console && console.warn && console.warn(t);
 }
-var w = Number.isNaN || function(t) {
-  return t !== t;
+var E = Number.isNaN || function(n) {
+  return n !== n;
 };
-function a() {
-  a.init.call(this);
+function u() {
+  u.init.call(this);
 }
-m.exports = a;
-m.exports.once = F;
-a.EventEmitter = a;
-a.prototype._events = void 0;
-a.prototype._eventsCount = 0;
-a.prototype._maxListeners = void 0;
+m.exports = u;
+m.exports.once = U;
+u.EventEmitter = u;
+u.prototype._events = void 0;
+u.prototype._eventsCount = 0;
+u.prototype._maxListeners = void 0;
 var y = 10;
-function v(n) {
-  if (typeof n != "function")
-    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof n);
+function p(t) {
+  if (typeof t != "function")
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof t);
 }
-Object.defineProperty(a, "defaultMaxListeners", {
+Object.defineProperty(u, "defaultMaxListeners", {
   enumerable: !0,
   get: function() {
     return y;
   },
-  set: function(n) {
-    if (typeof n != "number" || n < 0 || w(n))
-      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + n + ".");
-    y = n;
+  set: function(t) {
+    if (typeof t != "number" || t < 0 || E(t))
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + t + ".");
+    y = t;
   }
 });
-a.init = function() {
+u.init = function() {
   (this._events === void 0 || this._events === Object.getPrototypeOf(this)._events) && (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
 };
-a.prototype.setMaxListeners = function(t) {
-  if (typeof t != "number" || t < 0 || w(t))
-    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + t + ".");
-  return this._maxListeners = t, this;
+u.prototype.setMaxListeners = function(n) {
+  if (typeof n != "number" || n < 0 || E(n))
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + ".");
+  return this._maxListeners = n, this;
 };
-function x(n) {
-  return n._maxListeners === void 0 ? a.defaultMaxListeners : n._maxListeners;
+function w(t) {
+  return t._maxListeners === void 0 ? u.defaultMaxListeners : t._maxListeners;
 }
-a.prototype.getMaxListeners = function() {
-  return x(this);
+u.prototype.getMaxListeners = function() {
+  return w(this);
 };
-a.prototype.emit = function(t) {
+u.prototype.emit = function(n) {
   for (var e = [], r = 1; r < arguments.length; r++)
     e.push(arguments[r]);
-  var o = t === "error", i = this._events;
+  var o = n === "error", i = this._events;
   if (i !== void 0)
     o = o && i.error === void 0;
   else if (!o)
@@ -69,10 +69,10 @@ a.prototype.emit = function(t) {
     var s;
     if (e.length > 0 && (s = e[0]), s instanceof Error)
       throw s;
-    var u = new Error("Unhandled error." + (s ? " (" + s.message + ")" : ""));
-    throw u.context = s, u;
+    var a = new Error("Unhandled error." + (s ? " (" + s.message + ")" : ""));
+    throw a.context = s, a;
   }
-  var c = i[t];
+  var c = i[n];
   if (c === void 0)
     return !1;
   if (typeof c == "function")
@@ -82,103 +82,103 @@ a.prototype.emit = function(t) {
       g(l[r], this, e);
   return !0;
 };
-function E(n, t, e, r) {
+function M(t, n, e, r) {
   var o, i, s;
-  if (v(e), i = n._events, i === void 0 ? (i = n._events = /* @__PURE__ */ Object.create(null), n._eventsCount = 0) : (i.newListener !== void 0 && (n.emit(
+  if (p(e), i = t._events, i === void 0 ? (i = t._events = /* @__PURE__ */ Object.create(null), t._eventsCount = 0) : (i.newListener !== void 0 && (t.emit(
     "newListener",
-    t,
+    n,
     e.listener ? e.listener : e
-  ), i = n._events), s = i[t]), s === void 0)
-    s = i[t] = e, ++n._eventsCount;
-  else if (typeof s == "function" ? s = i[t] = r ? [e, s] : [s, e] : r ? s.unshift(e) : s.push(e), o = x(n), o > 0 && s.length > o && !s.warned) {
+  ), i = t._events), s = i[n]), s === void 0)
+    s = i[n] = e, ++t._eventsCount;
+  else if (typeof s == "function" ? s = i[n] = r ? [e, s] : [s, e] : r ? s.unshift(e) : s.push(e), o = w(t), o > 0 && s.length > o && !s.warned) {
     s.warned = !0;
-    var u = new Error("Possible EventEmitter memory leak detected. " + s.length + " " + String(t) + " listeners added. Use emitter.setMaxListeners() to increase limit");
-    u.name = "MaxListenersExceededWarning", u.emitter = n, u.type = t, u.count = s.length, A(u);
+    var a = new Error("Possible EventEmitter memory leak detected. " + s.length + " " + String(n) + " listeners added. Use emitter.setMaxListeners() to increase limit");
+    a.name = "MaxListenersExceededWarning", a.emitter = t, a.type = n, a.count = s.length, A(a);
   }
-  return n;
+  return t;
 }
-a.prototype.addListener = function(t, e) {
-  return E(this, t, e, !1);
+u.prototype.addListener = function(n, e) {
+  return M(this, n, e, !1);
 };
-a.prototype.on = a.prototype.addListener;
-a.prototype.prependListener = function(t, e) {
-  return E(this, t, e, !0);
+u.prototype.on = u.prototype.addListener;
+u.prototype.prependListener = function(n, e) {
+  return M(this, n, e, !0);
 };
 function T() {
   if (!this.fired)
     return this.target.removeListener(this.type, this.wrapFn), this.fired = !0, arguments.length === 0 ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
 }
-function _(n, t, e) {
-  var r = { fired: !1, wrapFn: void 0, target: n, type: t, listener: e }, o = T.bind(r);
+function x(t, n, e) {
+  var r = { fired: !1, wrapFn: void 0, target: t, type: n, listener: e }, o = T.bind(r);
   return o.listener = e, r.wrapFn = o, o;
 }
-a.prototype.once = function(t, e) {
-  return v(e), this.on(t, _(this, t, e)), this;
+u.prototype.once = function(n, e) {
+  return p(e), this.on(n, x(this, n, e)), this;
 };
-a.prototype.prependOnceListener = function(t, e) {
-  return v(e), this.prependListener(t, _(this, t, e)), this;
+u.prototype.prependOnceListener = function(n, e) {
+  return p(e), this.prependListener(n, x(this, n, e)), this;
 };
-a.prototype.removeListener = function(t, e) {
-  var r, o, i, s, u;
-  if (v(e), o = this._events, o === void 0)
+u.prototype.removeListener = function(n, e) {
+  var r, o, i, s, a;
+  if (p(e), o = this._events, o === void 0)
     return this;
-  if (r = o[t], r === void 0)
+  if (r = o[n], r === void 0)
     return this;
   if (r === e || r.listener === e)
-    --this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete o[t], o.removeListener && this.emit("removeListener", t, r.listener || e));
+    --this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete o[n], o.removeListener && this.emit("removeListener", n, r.listener || e));
   else if (typeof r != "function") {
     for (i = -1, s = r.length - 1; s >= 0; s--)
       if (r[s] === e || r[s].listener === e) {
-        u = r[s].listener, i = s;
+        a = r[s].listener, i = s;
         break;
       }
     if (i < 0)
       return this;
-    i === 0 ? r.shift() : S(r, i), r.length === 1 && (o[t] = r[0]), o.removeListener !== void 0 && this.emit("removeListener", t, u || e);
+    i === 0 ? r.shift() : S(r, i), r.length === 1 && (o[n] = r[0]), o.removeListener !== void 0 && this.emit("removeListener", n, a || e);
   }
   return this;
 };
-a.prototype.off = a.prototype.removeListener;
-a.prototype.removeAllListeners = function(t) {
+u.prototype.off = u.prototype.removeListener;
+u.prototype.removeAllListeners = function(n) {
   var e, r, o;
   if (r = this._events, r === void 0)
     return this;
   if (r.removeListener === void 0)
-    return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : r[t] !== void 0 && (--this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete r[t]), this;
+    return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : r[n] !== void 0 && (--this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete r[n]), this;
   if (arguments.length === 0) {
     var i = Object.keys(r), s;
     for (o = 0; o < i.length; ++o)
       s = i[o], s !== "removeListener" && this.removeAllListeners(s);
     return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
   }
-  if (e = r[t], typeof e == "function")
-    this.removeListener(t, e);
+  if (e = r[n], typeof e == "function")
+    this.removeListener(n, e);
   else if (e !== void 0)
     for (o = e.length - 1; o >= 0; o--)
-      this.removeListener(t, e[o]);
+      this.removeListener(n, e[o]);
   return this;
 };
-function b(n, t, e) {
-  var r = n._events;
+function b(t, n, e) {
+  var r = t._events;
   if (r === void 0)
     return [];
-  var o = r[t];
+  var o = r[n];
   return o === void 0 ? [] : typeof o == "function" ? e ? [o.listener || o] : [o] : e ? I(o) : P(o, o.length);
 }
-a.prototype.listeners = function(t) {
-  return b(this, t, !0);
+u.prototype.listeners = function(n) {
+  return b(this, n, !0);
 };
-a.prototype.rawListeners = function(t) {
-  return b(this, t, !1);
+u.prototype.rawListeners = function(n) {
+  return b(this, n, !1);
 };
-a.listenerCount = function(n, t) {
-  return typeof n.listenerCount == "function" ? n.listenerCount(t) : M.call(n, t);
+u.listenerCount = function(t, n) {
+  return typeof t.listenerCount == "function" ? t.listenerCount(n) : _.call(t, n);
 };
-a.prototype.listenerCount = M;
-function M(n) {
-  var t = this._events;
-  if (t !== void 0) {
-    var e = t[n];
+u.prototype.listenerCount = _;
+function _(t) {
+  var n = this._events;
+  if (n !== void 0) {
+    var e = n[t];
     if (typeof e == "function")
       return 1;
     if (e !== void 0)
@@ -186,51 +186,51 @@ function M(n) {
   }
   return 0;
 }
-a.prototype.eventNames = function() {
-  return this._eventsCount > 0 ? p(this._events) : [];
+u.prototype.eventNames = function() {
+  return this._eventsCount > 0 ? v(this._events) : [];
 };
-function P(n, t) {
-  for (var e = new Array(t), r = 0; r < t; ++r)
-    e[r] = n[r];
+function P(t, n) {
+  for (var e = new Array(n), r = 0; r < n; ++r)
+    e[r] = t[r];
   return e;
 }
-function S(n, t) {
-  for (; t + 1 < n.length; t++)
-    n[t] = n[t + 1];
-  n.pop();
+function S(t, n) {
+  for (; n + 1 < t.length; n++)
+    t[n] = t[n + 1];
+  t.pop();
 }
-function I(n) {
-  for (var t = new Array(n.length), e = 0; e < t.length; ++e)
-    t[e] = n[e].listener || n[e];
-  return t;
+function I(t) {
+  for (var n = new Array(t.length), e = 0; e < n.length; ++e)
+    n[e] = t[e].listener || t[e];
+  return n;
 }
-function F(n, t) {
+function U(t, n) {
   return new Promise(function(e, r) {
     function o(s) {
-      n.removeListener(t, i), r(s);
+      t.removeListener(n, i), r(s);
     }
     function i() {
-      typeof n.removeListener == "function" && n.removeListener("error", o), e([].slice.call(arguments));
+      typeof t.removeListener == "function" && t.removeListener("error", o), e([].slice.call(arguments));
     }
-    R(n, t, i, { once: !0 }), t !== "error" && $(n, o, { once: !0 });
+    C(t, n, i, { once: !0 }), n !== "error" && F(t, o, { once: !0 });
   });
 }
-function $(n, t, e) {
-  typeof n.on == "function" && R(n, "error", t, e);
+function F(t, n, e) {
+  typeof t.on == "function" && C(t, "error", n, e);
 }
-function R(n, t, e, r) {
-  if (typeof n.on == "function")
-    r.once ? n.once(t, e) : n.on(t, e);
-  else if (typeof n.addEventListener == "function")
-    n.addEventListener(t, function o(i) {
-      r.once && n.removeEventListener(t, o), e(i);
+function C(t, n, e, r) {
+  if (typeof t.on == "function")
+    r.once ? t.once(n, e) : t.on(n, e);
+  else if (typeof t.addEventListener == "function")
+    t.addEventListener(n, function o(i) {
+      r.once && t.removeEventListener(n, o), e(i);
     });
   else
-    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof n);
+    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof t);
 }
-var D = m.exports;
-const U = /* @__PURE__ */ j(D), K = () => `ID_${Math.floor(Math.random() * 100)}`, W = (n, t = 2) => Number.isNaN(+n) ? n : +(+n).toFixed(t), L = "-26px";
-class q extends U {
+var $ = m.exports;
+const D = /* @__PURE__ */ j($), K = (t = "uid") => `${t}_${Math.random().toString(16).substring(2)}`, k = (t, n = 2) => Number.isNaN(+t) ? t : +(+t).toFixed(n), L = "-26px";
+class V extends D {
   constructor(e, r = {}) {
     super();
     f(this, "centerPos", { x: 0, y: 0 });
@@ -240,45 +240,46 @@ class q extends U {
     f(this, "container");
     f(this, "options");
     f(this, "targetClassName", K());
+    f(this, "isMobile", typeof window.orientation < "u" || "ontouchstart" in document.documentElement || /Mobi|Android|iPhone/i.test(navigator.userAgent));
     /**
      * 鼠标按下
      * @param event
      */
     f(this, "onMouseDown", (e) => {
-      e.stopPropagation(), this.originRotate = 0, this.startPos = { x: e.x, y: e.y }, this.calcCenterPos();
+      e.stopPropagation(), this.originRotate = 0, this.startPos = this.getClickPos(e), this.calcCenterPos();
       const r = this.container.style.transform, o = /rotate\((.*)deg\)/g;
       r.replace(
         o,
-        (s, u) => (u = +u, this.originRotate += u)
+        (s, a) => (a = +a, this.originRotate += a)
       ), this.originRotate = (+this.originRotate || 0) % 360;
       const i = {
         event: e,
         target: this.container,
         rotate: this.originRotate
       };
-      this.emit("rotateStart", i), document.addEventListener("mousemove", this.onMouseMove, !1), document.addEventListener("mouseup", this.onMouseUp, !1);
+      this.emit("rotateStart", i), this.isMobile ? (document.addEventListener("touchmove", this.onMouseMove, !1), document.addEventListener("touchend", this.onMouseUp, !1)) : (document.addEventListener("mousemove", this.onMouseMove, !1), document.addEventListener("mouseup", this.onMouseUp, !1));
     });
     /**
      * 鼠标移动
      * @param event
      */
     f(this, "onMouseMove", (e) => {
-      const r = this.container.style.transform || "rotate(0deg)", o = W(
-        (this.calcRotate(this.startPos, e) + this.originRotate) % 360
-      ), i = /rotate\(.*deg\)/g, s = r.replace(
-        i,
-        () => `rotate(${o}deg)`
+      const r = this.container.style.transform || "rotate(0deg)", o = this.getClickPos(e), i = k(
+        (this.calcRotate(this.startPos, o) + this.originRotate) % 360
+      ), s = /rotate\(.*deg\)/g, a = r.replace(
+        s,
+        () => `rotate(${i}deg)`
       );
-      this.container.style.transform = s;
-      const u = { event: e, target: this.container, rotate: o };
-      this.emit("rotate", u);
+      this.container.style.transform = a;
+      const c = { event: e, target: this.container, rotate: i };
+      this.emit("rotate", c);
     });
     /**
      * 鼠标抬起
      */
     f(this, "onMouseUp", (e) => {
       const r = { event: e, target: this.container };
-      this.emit("rotateEnd", r), document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1);
+      this.emit("rotateEnd", r), this.isMobile ? (document.removeEventListener("touchmove", this.onMouseMove, !1), document.removeEventListener("touchend", this.onMouseUp, !1)) : (document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1));
     });
     if (!e)
       throw new Error("not found container");
@@ -311,8 +312,8 @@ class q extends U {
           </svg>
       </div>`, c = new DOMParser().parseFromString(s, "text/html"), h = c.body.firstChild;
     if (r instanceof Element) {
-      const C = c.body.querySelector("svg");
-      h.replaceChild(r, C);
+      const R = c.body.querySelector("svg");
+      h.replaceChild(r, R);
     }
     (l = this.container) == null || l.appendChild(h), this.target = document.querySelector(`.${this.targetClassName}`);
   }
@@ -325,8 +326,8 @@ class q extends U {
     }
   }
   calcCenterPos() {
-    const { x: e, y: r, width: o, height: i } = this.container.getBoundingClientRect(), s = e + o / 2, u = r + i / 2;
-    this.setCenterPos({ x: s, y: u });
+    const { x: e, y: r, width: o, height: i } = this.container.getBoundingClientRect(), s = e + o / 2, a = r + i / 2;
+    this.setCenterPos({ x: s, y: a });
   }
   setCenterPos(e) {
     this.centerPos.x = e.x, this.centerPos.y = e.y;
@@ -335,10 +336,15 @@ class q extends U {
     this.target = null, this.container = null, this.destroyEvents();
   }
   registryEvents() {
-    this.target.addEventListener("mousedown", this.onMouseDown, !1);
+    this.isMobile ? this.target.addEventListener("touchstart", this.onMouseDown, !1) : this.target.addEventListener("mousedown", this.onMouseDown, !1);
   }
   destroyEvents() {
-    return document.removeEventListener("mousedown", this.onMouseDown, !1), document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1), this;
+    return this.isMobile ? (document.removeEventListener("touchstart", this.onMouseDown, !1), document.removeEventListener("touchmove", this.onMouseMove, !1), document.removeEventListener("touchend", this.onMouseUp, !1)) : (document.removeEventListener("mousedown", this.onMouseDown, !1), document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1)), this;
+  }
+  getClickPos(e) {
+    var i, s, a, c;
+    const r = this.isMobile ? (s = (i = e.touches) == null ? void 0 : i[0]) == null ? void 0 : s.pageX : e.x, o = this.isMobile ? (c = (a = e.touches) == null ? void 0 : a[0]) == null ? void 0 : c.pageY : e.y;
+    return { x: r, y: o };
   }
   /**
    * 计算旋转角度
@@ -350,14 +356,14 @@ class q extends U {
     const { x: o, y: i } = this.centerPos, s = {
       x: e.x - o,
       y: e.y - i
-    }, u = {
+    }, a = {
       x: r.x - o,
       y: r.y - i
-    }, c = s.x * u.x + s.y * u.y, h = s.x * u.y - s.y * u.x;
+    }, c = s.x * a.x + s.y * a.y, h = s.x * a.y - s.y * a.x;
     let l = Math.atan2(h, c);
     return l = (l + 2 * Math.PI) % (2 * Math.PI), l * (180 / Math.PI);
   }
 }
 export {
-  q as default
+  V as default
 };

@@ -19,6 +19,7 @@ export declare class ElementRotator extends Event$1 {
 	container: HTMLElement | null;
 	options: IOptions;
 	targetClassName: string;
+	isMobile: boolean;
 	constructor(container: HTMLElement, options?: IOptions);
 	createTargetElement(): void;
 	setInitStyle(): void;
@@ -31,16 +32,20 @@ export declare class ElementRotator extends Event$1 {
 	 * 鼠标按下
 	 * @param event
 	 */
-	onMouseDown: (event: MouseEvent) => void;
+	onMouseDown: (event: MouseEvent | TouchEvent) => void;
 	/**
 	 * 鼠标移动
 	 * @param event
 	 */
-	onMouseMove: (event: MouseEvent) => void;
+	onMouseMove: (event: MouseEvent | TouchEvent) => void;
 	/**
 	 * 鼠标抬起
 	 */
-	onMouseUp: (event: MouseEvent) => void;
+	onMouseUp: (event: MouseEvent | TouchEvent) => void;
+	getClickPos(event: MouseEvent | TouchEvent): {
+		x: number;
+		y: number;
+	};
 	/**
 	 * 计算旋转角度
 	 * @param initialPoint - 开始点位

@@ -16,6 +16,11 @@ class ElementRotator extends Event {
 
   targetClassName = uid();
 
+  isMobile: boolean =
+    typeof window.orientation !== "undefined" ||
+    "ontouchstart" in document.documentElement ||
+    /Mobi|Android|iPhone/i.test(navigator.userAgent);
+
   constructor(container: HTMLElement, options: IOptions = {}) {
     super();
 
@@ -120,13 +125,23 @@ class ElementRotator extends Event {
   }
 
   registryEvents() {
-    this.target!.addEventListener("mousedown", this.onMouseDown, false);
+    if (this.isMobile) {
+      this.target!.addEventListener("touchstart", this.onMouseDown, false);
+    } else {
+      this.target!.addEventListener("mousedown", this.onMouseDown, false);
+    }
   }
 
   destroyEvents() {
-    document.removeEventListener("mousedown", this.onMouseDown, false);
-    document.removeEventListener("mousemove", this.onMouseMove, false);
-    document.removeEventListener("mouseup", this.onMouseUp, false);
+    if (this.isMobile) {
+      document.removeEventListener("touchstart", this.onMouseDown, false);
+      document.removeEventListener("touchmove", this.onMouseMove, false);
+      document.removeEventListener("touchend", this.onMouseUp, false);
+    } else {
+      document.removeEventListener("mousedown", this.onMouseDown, false);
+      document.removeEventListener("mousemove", this.onMouseMove, false);
+      document.removeEventListener("mouseup", this.onMouseUp, false);
+    }
     return this;
   }
 
@@ -134,11 +149,12 @@ class ElementRotator extends Event {
    * 鼠标按下
    * @param event
    */
-  onMouseDown = (event: MouseEvent) => {
+  onMouseDown = (event: MouseEvent | TouchEvent) => {
     event.stopPropagation();
 
     this.originRotate = 0;
-    this.startPos = { x: event.x, y: event.y };
+
+    this.startPos = this.getClickPos(event);
     this.calcCenterPos();
 
     const originTransform = this.container!.style.transform;
@@ -157,19 +173,26 @@ class ElementRotator extends Event {
       rotate: this.originRotate,
     } as IEvent;
     this.emit("rotateStart", _event);
-    document.addEventListener("mousemove", this.onMouseMove, false);
-    document.addEventListener("mouseup", this.onMouseUp, false);
+
+    if (this.isMobile) {
+      document.addEventListener("touchmove", this.onMouseMove, false);
+      document.addEventListener("touchend", this.onMouseUp, false);
+    } else {
+      document.addEventListener("mousemove", this.onMouseMove, false);
+      document.addEventListener("mouseup", this.onMouseUp, false);
+    }
   };
 
   /**
    * 鼠标移动
    * @param event
    */
-  onMouseMove = (event: MouseEvent) => {
+  onMouseMove = (event: MouseEvent | TouchEvent) => {
     const originTransform = this.container!.style.transform || "rotate(0deg)";
 
+    const position = this.getClickPos(event);
     const rotate = toPrecision(
-      (this.calcRotate(this.startPos, event) + this.originRotate) % 360
+      (this.calcRotate(this.startPos, position) + this.originRotate) % 360
     );
     const regexp = /rotate\(.*deg\)/g;
 
@@ -186,12 +209,30 @@ class ElementRotator extends Event {
   /**
    * 鼠标抬起
    */
-  onMouseUp = (event: MouseEvent) => {
+  onMouseUp = (event: MouseEvent | TouchEvent) => {
     const _event = { event, target: this.container } as IEvent;
     this.emit("rotateEnd", _event);
-    document.removeEventListener("mousemove", this.onMouseMove, false);
-    document.removeEventListener("mouseup", this.onMouseUp, false);
+
+    if (this.isMobile) {
+      document.removeEventListener("touchmove", this.onMouseMove, false);
+      document.removeEventListener("touchend", this.onMouseUp, false);
+    } else {
+      document.removeEventListener("mousemove", this.onMouseMove, false);
+      document.removeEventListener("mouseup", this.onMouseUp, false);
+    }
   };
+
+  getClickPos(event: MouseEvent | TouchEvent) {
+    const x = this.isMobile
+      ? (event as TouchEvent).touches?.[0]?.pageX
+      : (event as MouseEvent).x;
+
+    const y = this.isMobile
+      ? (event as TouchEvent).touches?.[0]?.pageY
+      : (event as MouseEvent).y;
+
+    return { x, y };
+  }
 
   /**
    * 计算旋转角度

@@ -1,5 +1,5 @@
-export const uid = () => {
-  return `ID_${Math.floor(Math.random() * 100)}`;
+export const uid = (prefix = "uid") => {
+  return `${prefix}_${Math.random().toString(16).substring(2)}`;
 };
 
 export const toPrecision = (v: number | string, precision: number = 2) => {
